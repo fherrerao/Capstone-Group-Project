@@ -7,7 +7,13 @@
   "scripts": {
     "test": "jest",
     "start": "webpack serve --open",
-    "build": "webpack"
+    "build": "webpack",
+    "jlint": "npx eslint .",
+    "fjlint": "npx eslint --fix .",
+    "stylelint": "npx stylelint '**/*.css' '**/*.scss'",
+    "fstylelint": "npx stylelint --fix '**/*.css' '**/*.scss'",
+    "hint": "npx hint --telemetry=off .",
+    "fhint": "npx hint --fix --telemetry=off ."
   },
   "jest": {
     "testEnvironment": "jsdom"
@@ -24,7 +30,8 @@
   },
   "homepage": "https://github.com/fherrerao/webpack_template#readme",
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "package-lock.json": "^1.0.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
