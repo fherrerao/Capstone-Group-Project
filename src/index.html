@@ -5,11 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movies App</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <header class="header flex main-space-around cross-center">
       <div class="logo flex cross-center">
-        <img class="logo-image" src="" alt="logo">
+        <img class="logo-image" alt="logo">
         <h1 class="logo-text">Movies App</h1>
       </div>
       <ul class="nav flex main-space-between">
@@ -17,5 +23,53 @@
         <li><a href="#">Movies</a></li>
       </ul>
     </header>
+
+    <div class="card-wrapper">
+      <div class="card">
+        <div class="card-header">
+          <div class="close">
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="card-image flex main-center">
+            <img src="https://static.tvmaze.com/uploads/images/medium_portrait/241/603425.jpg" alt="character">
+          </div>
+          <h2 class="card-title text-center">Name</h2>
+        </div>
+        <div class="card-content">
+          <dl class="flex main-space-around">
+            <div class="left">
+              <dt>Type</dt>
+                <dd>Documentry</dd>
+              <dt>Language</dt>
+                <dd>English</dd>
+              <dt>Generes</dt>
+                <dd>Crime</dd>
+              <dt>Status</dt>
+                <dd>Running</dd>
+              <dt>Runtime</dt>
+                <dd>60</dd>
+              <dt>AverageRuntime</dt>
+                <dd>60</dd>
+            </div>
+            <div class="right">
+              <dt>Premiered</dt>
+                <dd>2020-04-12</dd>
+              <dt>Ended</dt>
+                <dd>null</dd>
+              <dt>OfficialSite</dt>
+                <dd><a href="https://www.investigationdiscovery.com/tv-shows/raw-terror/">link</a></dd>
+              <dt>Schedule</dt>
+                <dd>time: 22:00, day: Tuesday</dd>
+              <dt>Rating</dt>
+                <dd>average: null</dd>
+              <dt>Weight</dt>
+                <dd>74</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
+
+
