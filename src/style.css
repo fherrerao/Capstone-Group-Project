@@ -18,6 +18,10 @@ ul {
   list-style: none;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .flex {
   display: flex;
 }
@@ -36,6 +40,10 @@ ul {
 
 .main-space-around {
   justify-content: space-around;
+}
+
+.logo-image {
+  background: url("./logo.png");
 }
 
 .nav {
@@ -58,4 +66,38 @@ ul {
 
 .nav a:active {
   background-color: #ddd;
+}
+
+.card-wrapper {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: fixed;
+  backdrop-filter: blur(5px);
+  --webkit-backdrop-filter: blur(5px);
+  --moz-backdrop-filter: blur(5px);
+}
+
+.card {
+  position: absolute;
+  width: 80%;
+  margin: 7% auto;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #ddd;
+  padding: 20px;
+  max-width: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0px 0px 40px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 30px;
+  cursor: pointer;
 }
