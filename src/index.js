@@ -1,8 +1,7 @@
 import './style.css';
 import Character from './home-page.js';
 
-
-Character.getMovies().then(data => {
+Character.getMovies().then((data) => {
   const movieContainer = document.querySelector('.movie-container');
 
   data.forEach((item) => {
@@ -25,10 +24,12 @@ Character.getMovies().then(data => {
 
   buttons.forEach((button) => {
     button.addEventListener('click', (event) => {
-      let id = event.target.getAttribute('data-id');
-      let allData = data.filter(item => item.show.id === parseInt(id))[0].show;
+      const id = event.target.getAttribute('data-id');
+      const allData = data.filter(
+        (item) => item.show.id === parseInt(id, 10),
+      )[0].show;
       console.log(allData);
-      let template = `<div class="card-wrapper">
+      const template = `<div class="card-wrapper">
         <div class="card">
           <div class="card-header">
             <div class="close">
@@ -47,7 +48,7 @@ Character.getMovies().then(data => {
                 <dt>Language</dt>
                   <dd>${allData.language}</dd>
                 <dt>Generes</dt>
-                  <dd>${allData.genres.toString() || "None"}</dd>
+                  <dd>${allData.genres.toString() || 'None'}</dd>
                 <dt>Status</dt>
                   <dd>${allData.status}</dd>
                 <dt>Runtime</dt>
@@ -63,7 +64,9 @@ Character.getMovies().then(data => {
                 <dt>OfficialSite</dt>
                   <dd><a href="${allData.officialSite}">link</a></dd>
                 <dt>Schedule</dt>
-                  <dd>time: ${allData.schedule.time}, day: ${allData.schedule.days}</dd>
+                  <dd>time: ${allData.schedule.time}, day: ${
+  allData.schedule.days
+}</dd>
                 <dt>Rating</dt>
                   <dd>average: ${allData.rating.average}</dd>
                 <dt>Weight</dt>
@@ -83,5 +86,4 @@ Character.getMovies().then(data => {
       });
     });
   });
-
 });
