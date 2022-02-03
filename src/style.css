@@ -123,6 +123,23 @@ h2 {
   margin-top: 1rem;
 }
 
+.like-icon:hover {
+  cursor: pointer;
+}
+
+.logo {
+  background-image: url("../src/assets/logo.png");
+  width: 10rem;
+  height: 10rem;
+  background-size: cover;
+  margin-right: 2rem;
+}
+
+.header {
+  border-bottom: 2px solid black;
+  padding: 2rem 0;
+}
+
 @media (min-width: 768px) {
   .movie-container {
     display: grid;
