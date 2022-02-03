@@ -1,7 +1,7 @@
-import NewApi from "./newApi.js";
+import NewApi from './newApi.js';
 
 export default class Movies {
-  static url = "https://api.tvmaze.com/search/shows?q=terror";
+  static url = 'https://api.tvmaze.com/search/shows?q=terror';
 
   static updateLikes = () => {
     NewApi.getLikes().then((data) => {
@@ -13,9 +13,9 @@ export default class Movies {
   };
 
   static setEventLikes = () => {
-    const likeIcon = document.querySelectorAll(".like-icon");
+    const likeIcon = document.querySelectorAll('.like-icon');
     likeIcon.forEach((element) => {
-      element.addEventListener("click", () => {
+      element.addEventListener('click', () => {
         NewApi.setLike(parseInt(element.id, 10)).then(() => {
           this.updateLikes();
         });
@@ -26,11 +26,11 @@ export default class Movies {
   static getMovies = async () => {
     const response = await fetch(this.url);
     const data = await response.json();
-    const movieContainer = document.querySelector(".movie-container");
+    const movieContainer = document.querySelector('.movie-container');
 
     data.forEach((item) => {
-      const div = document.createElement("div");
-      div.classList.add("div-container");
+      const div = document.createElement('div');
+      div.classList.add('div-container');
       div.innerHTML = `<img src="${item.show.image.medium}" alt="">
       <div class="media flex main-space-between">
         <li>${item.show.name}</li>
@@ -45,17 +45,15 @@ export default class Movies {
     this.setEventLikes();
     this.updateLikes();
 
-    const buttons = document.querySelectorAll(".button");
+    const buttons = document.querySelectorAll('.button');
 
     buttons.forEach((button) => {
-      button.addEventListener("click", (event) => {
-        let id = event.target.getAttribute("data-id");
-        console.log(id);
-        console.log(data);
-        let allData = data.filter((item) => item.show.id === parseInt(id))[0]
-          .show;
-        console.log(allData);
-        let template = `<div class="card-wrapper">
+      button.addEventListener('click', (event) => {
+        const id = event.target.getAttribute('data-id');
+        const allData = data.filter(
+          (item) => item.show.id === parseInt(id, 10),
+        )[0].show;
+        const template = `<div class="card-wrapper">
         <div class="card">
           <div class="card-header">
             <div class="close">
@@ -74,7 +72,7 @@ export default class Movies {
                 <dt>Language</dt>
                   <dd>${allData.language}</dd>
                 <dt>Generes</dt>
-                  <dd>${allData.genres.toString() || "None"}</dd>
+                  <dd>${allData.genres.toString() || 'None'}</dd>
                 <dt>Status</dt>
                   <dd>${allData.status}</dd>
                 <dt>Runtime</dt>
@@ -102,12 +100,12 @@ export default class Movies {
           </div>
         </div>
       </div>`;
-        document.body.insertAdjacentHTML("beforeend", template);
+        document.body.insertAdjacentHTML('beforeend', template);
 
-        const close = document.querySelectorAll(".close");
+        const close = document.querySelectorAll('.close');
         close.forEach((item) => {
-          item.addEventListener("click", () => {
-            document.querySelector(".card-wrapper").remove();
+          item.addEventListener('click', () => {
+            document.querySelector('.card-wrapper').remove();
           });
         });
       });
