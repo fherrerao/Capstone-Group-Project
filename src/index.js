@@ -1,5 +1,7 @@
-import './style.css';
-import Character from './home-page.js';
-import './assets/logo.jpg';
+import "./style.css";
+import Movies from "./home-page.js";
+import NewApi from "./newApi.js";
 
-Character.getMovies();
+Movies.getMovies();
+NewApi.getLikes();
+// Movies.getMovieLikes();
