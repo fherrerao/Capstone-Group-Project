@@ -98,6 +98,32 @@ export default class Movies {
               </div>
             </dl>
           </div>
+          <div class="comments">
+            <h3>Comments</h3>
+            <div class="comment-container">
+              <div class="comment-input flex">
+                <input type="text" placeholder="Add a comment...">
+                <button class="button">Add</button>
+              </div>
+            </div>
+            <div class="comment-list">
+              <div class="comment flex cross-center">
+                <div class="comment-header flex cross-center">
+                  <div class="comment-name flex cross-center">
+                    <h4 class="mr-1">name: </h4>
+                    <p class="mr-1>date: </p>
+                  </div>
+                </div>
+                <div class="comment-content flex cross-center">
+                  <p class="mr-1">comment</p>
+                  <div class="comment-actions">
+                    <button class="button">Like</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
         </div>
       </div>`;
         document.body.insertAdjacentHTML('beforeend', template);
