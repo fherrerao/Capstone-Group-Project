@@ -126,7 +126,7 @@ export default class Movies {
           </div>
         </div>
       </div>`;
-        const commentsData;
+        const commentsData = [{'comment': 'test', 'name': 'test', 'date': 'test'}];
         const commentTemplate = commentsData.map((item) => {
           const { username, date, comment } = item;
           return `<div class="comments">
