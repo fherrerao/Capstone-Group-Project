@@ -1,7 +1,8 @@
+import fetch from "cross-fetch";
 import NewApi from "./newApi.js";
 
 export default class Movies {
-  static url = "https://api.tvmaze.com/search/shows?q=action";
+  static url = "https://api.tvmaze.com/search/shows?q=terror";
 
   static counterMovies = async () => {
     const response = await fetch(this.url);
@@ -11,9 +12,11 @@ export default class Movies {
       if (item.show.image !== null) {
         counter += 1;
       }
+      const title = document.querySelector(".title");
+      if (title) title.textContent = `MOVIES (${counter})`;
     });
-    const title = document.querySelector(".title");
-    title.textContent = `MOVIES (${counter})`;
+
+    return counter;
   };
 
   static updateLikes = () => {
@@ -50,7 +53,7 @@ export default class Movies {
       <div class="media flex main-space-between">
         <li>${item.show.name}</li>
         <div class="likes-container">
-          <box-icon id=${item.show.id} class="like-icon" name='heart'></box-icon>
+          <box-icon color="red" animation="tada-hover" id=${item.show.id} class="like-icon" name='heart'></box-icon>
           <p>0 Likes</p>
         </div>
       </div>      
