@@ -44,8 +44,14 @@ Run the comand npm run start to get a working environment with the project
 👤 **Fernando Herrera**
 
 - GitHub: [@fherrerao](https://github.com/fherrerao)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/fernando-herrera-25a6361b2/)
+- LinkedIn: [@fernando](https://www.linkedin.com/in/fernando-herrera-25a6361b2/)
 - Twitter: [@fherrera0206](https://twitter.com/fherrera0206)
+
+👤 **Fernando Herrera**
+
+- **GitHub**: [![@mrramoun](https://img.shields.io/github/followers/MrRamoun?label=Ramoun&style=social)](https://github.com/mrramoun)
+- **Twitter**: [![@ramoun16](https://img.shields.io/twitter/follow/ramoun16?label=ramoun16&style=social)](https://twitter.com/ramoun16)
+- **LinkdIn**: [![@ramoun](https://img.shields.io/github/followers/ramon?label=ramoun&logo=linkedin&style=social)](https://www.linkedin.com/in/ramoun/)```
 
 ## 🤝 Contributing
 
