@@ -8,4 +8,3 @@ NewApi.getLikes();
 commentsApi.getComments();
 Movies.counterMovies();
 NewApi.aboutSection();
-
