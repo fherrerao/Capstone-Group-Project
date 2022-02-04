@@ -8,11 +8,12 @@ export default class commentsApi {
     return data;
   };
 
-  static setComments = async (id, name, date, comment) => {
+  static setComments = async (id, movie_id, name, date, comment) => {
     const response = await fetch(this.url, {
       method: 'POST',
       body: JSON.stringify({
         item_id: id,
+        item_movie_id: movie_id,
         item_name: name,
         item_date: date,
         item_comment: comment,

@@ -13,18 +13,18 @@ export default class Movies {
     });
   };
 
-  static updateComments = () => {
-    commentsApi.getComments().then((data) => {
-      data.forEach((item) => {
-        const comment = document.getElementById('comment');
-        const name = document.getElementById('comment-name');
-        const date = document.getElementById('comment-date');
-        comment.innerHTML = `${item.comment}`;
-        name.innerHTML = `${item.name}`;
-        date.innerHTML = `${item.date}`;
-      });
-    });
-  };
+  // static updateComments = () => {
+  //   commentsApi.getComments().then((data) => {
+  //     data.forEach((item) => {
+  //       const comment = document.getElementById('comment');
+  //       const name = document.getElementById('comment-name');
+  //       const date = document.getElementById('comment-date');
+  //       comment.innerHTML = `${item.comment}`;
+  //       name.innerHTML = `${item.name}`;
+  //       date.innerHTML = `${item.date}`;
+  //     });
+  //   });
+  // };
 
   static setEventLikes = () => {
     const likeIcon = document.querySelectorAll('.like-icon');
@@ -37,16 +37,16 @@ export default class Movies {
     });
   };
 
-  static setEventComments = () => {
-    const likeIcon = document.querySelectorAll('.like-icon');
-    likeIcon.forEach((element) => {
-      element.addEventListener('click', () => {
-        NewApi.setLike(parseInt(element.id, 10)).then(() => {
-          this.updateLikes();
-        });
-      });
-    });
-  };
+  // static setEventComments = () => {
+  //   const likeIcon = document.querySelectorAll('.like-icon');
+  //   likeIcon.forEach((element) => {
+  //     element.addEventListener('click', () => {
+  //       NewApi.setLike(parseInt(element.id, 10)).then(() => {
+  //         this.updateLikes();
+  //       });
+  //     });
+  //   });
+  // };
 
   static getMovies = async () => {
     const response = await fetch(this.url);
@@ -78,7 +78,8 @@ export default class Movies {
         const allData = data.filter(
           (item) => item.show.id === parseInt(id, 10),
         )[0].show;
-        const template = `<div class="card-wrapper">
+
+        let template = `<div class="card-wrapper">
         <div class="card">
           <div class="card-header">
             <div class="close">
@@ -123,34 +124,38 @@ export default class Movies {
               </div>
             </dl>
           </div>
-          <div class="comments">
-            <h3>Comments</h3>
-            <div class="comment-container">
-              <div class="comment-input flex">
-                <input type="text" placeholder="Add a comment...">
-                <button class="button">Add</button>
-              </div>
-            </div>
-            <div class="comment-list">
-              <div class="comment flex cross-center">
-                <div class="comment-header flex cross-center">
-                  <div class="comment-name flex cross-center">
-                    <h4 id="comment-name" class="mr-1">name: </h4>
-                    <p id="comment-date" class="mr-1>date: </p>
-                  </div>
-                </div>
-                <div class="comment-content flex cross-center">
-                  <p id="comment" class="mr-1">comment</p>
-                  <div class="comment-actions">
-                    <button class="button">Like</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
         </div>
       </div>`;
+        const commentsData;
+        const commentTemplate = commentsData.map((item) => {
+          const { username, date, comment } = item;
+          return `<div class="comments">
+          <h3>Comments</h3>
+          <div class="comment-container">
+            <div class="comment-input flex">
+              <input type="text" placeholder="Add a comment...">
+              <button class="button">Add</button>
+            </div>
+          </div>
+          <div class="comment-list">
+            <div class="comment flex cross-center">
+              <div class="comment-header flex cross-center">
+                <div class="comment-name flex cross-center">
+                  <h4 id="comment-name" class="mr-1">${username}</h4>
+                  <p id="comment-date" class="mr-1>${date}</p>
+                </div>
+              </div>
+              <div class="comment-content flex cross-center">
+                <p id="comment" class="mr-1">${comment}</p>
+                <div class="comment-actions">
+                  <button class="button">Like</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        });
+        template += commentTemplate;
         document.body.insertAdjacentHTML('beforeend', template);
 
         const close = document.querySelectorAll('.close');
