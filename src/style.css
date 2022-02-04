@@ -205,6 +205,20 @@ dt {
   cursor: pointer;
 }
 
+.d-none {
+  display: none;
+}
+
+.about-section {
+  flex-direction: column;
+  height: 80vh;
+}
+
+.about-section p {
+  text-align: justify;
+  width: 50rem;
+}
+
 @media (min-width: 768px) {
   .movie-container {
     display: -ms-grid;
