@@ -130,8 +130,8 @@ export default class Movies {
           {
             comment: 'test',
             name: 'test',
-            date: 'test'
-          }
+            date: 'test',
+          },
         ];
         const commentTemplate = commentsData.map((item) => {
           const { username, date, comment } = item;
