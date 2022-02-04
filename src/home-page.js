@@ -1,4 +1,5 @@
 import NewApi from './newApi.js';
+import commentsApi from './commentsApi.js';
 
 export default class Movies {
   static url = 'https://api.tvmaze.com/search/shows?q=terror';
@@ -12,7 +13,31 @@ export default class Movies {
     });
   };
 
+  static updateComments = () => {
+    commentsApi.getComments().then((data) => {
+      data.forEach((item) => {
+        const comment = document.getElementById('comment');
+        const name = document.getElementById('comment-name');
+        const date = document.getElementById('comment-date');
+        comment.innerHTML = `${item.comment}`;
+        name.innerHTML = `${item.name}`;
+        date.innerHTML = `${item.date}`;
+      });
+    });
+  };
+
   static setEventLikes = () => {
+    const likeIcon = document.querySelectorAll('.like-icon');
+    likeIcon.forEach((element) => {
+      element.addEventListener('click', () => {
+        NewApi.setLike(parseInt(element.id, 10)).then(() => {
+          this.updateLikes();
+        });
+      });
+    });
+  };
+
+  static setEventComments = () => {
     const likeIcon = document.querySelectorAll('.like-icon');
     likeIcon.forEach((element) => {
       element.addEventListener('click', () => {
@@ -38,7 +63,7 @@ export default class Movies {
           <box-icon id=${item.show.id} class="like-icon" name='heart'></box-icon>
           <p>0 Likes</p>
         </div>
-      </div>      
+      </div>
       <button data-id="${item.show.id}" class="button">Comments</button>`;
       movieContainer.appendChild(div);
     });
@@ -110,12 +135,12 @@ export default class Movies {
               <div class="comment flex cross-center">
                 <div class="comment-header flex cross-center">
                   <div class="comment-name flex cross-center">
-                    <h4 class="mr-1">name: </h4>
-                    <p class="mr-1>date: </p>
+                    <h4 id="comment-name" class="mr-1">name: </h4>
+                    <p id="comment-date" class="mr-1>date: </p>
                   </div>
                 </div>
                 <div class="comment-content flex cross-center">
-                  <p class="mr-1">comment</p>
+                  <p id="comment" class="mr-1">comment</p>
                   <div class="comment-actions">
                     <button class="button">Like</button>
                   </div>

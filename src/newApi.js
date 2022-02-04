@@ -5,7 +5,6 @@ export default class NewApi {
   static getLikes = async () => {
     const response = await fetch(this.url);
     const data = await response.json();
-    // console.log(data);
     return data;
   };
 
