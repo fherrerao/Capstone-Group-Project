@@ -1,5 +1,5 @@
 import NewApi from './newApi.js';
-import commentsApi from './commentsApi.js';
+// import commentsApi from './commentsApi.js';
 
 export default class Movies {
   static url = 'https://api.tvmaze.com/search/shows?q=terror';
@@ -126,7 +126,13 @@ export default class Movies {
           </div>
         </div>
       </div>`;
-        const commentsData = [{'comment': 'test', 'name': 'test', 'date': 'test'}];
+        const commentsData = [
+          {
+            comment: 'test',
+            name: 'test',
+            date: 'test'
+          }
+        ];
         const commentTemplate = commentsData.map((item) => {
           const { username, date, comment } = item;
           return `<div class="comments">
