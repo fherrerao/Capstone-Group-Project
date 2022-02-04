@@ -31,7 +31,8 @@
   "homepage": "https://github.com/fherrerao/webpack_template#readme",
   "dependencies": {
     "lodash": "^4.17.21",
-    "package-lock.json": "^1.0.0"
+    "package-lock.json": "^1.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",

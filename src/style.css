@@ -73,7 +73,7 @@ dt {
 }
 
 .logo-image {
-  /* background: url("./logo.png"); */
+  background: url("./assets/logo.jpg");
 }
 
 .nav {
@@ -183,6 +183,10 @@ dt {
 .media {
   width: 21rem;
   margin-top: 1rem;
+}
+
+.like-icon:hover {
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
