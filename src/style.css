@@ -28,9 +28,9 @@ ul {
   list-style: none;
 }
 
-h2 {
+.title {
   text-align: center;
-  font-family: "New MOTOR", sans-serif;
+  font-family: "COCOGOOSE", sans-serif;
   font-size: 4rem;
 }
 
@@ -42,10 +42,6 @@ dt {
   font-weight: bold;
   font-size: 1.7rem;
   margin-left: 20px;
-}
-
-.d-none {
-  display: none;
 }
 
 .text-center {
@@ -72,8 +68,24 @@ dt {
   justify-content: space-around;
 }
 
-.logo-image {
-  background: url("./assets/logo.jpg");
+.logo {
+  background-image: url("./assets/logo.jpg");
+  background-size: cover;
+  width: 6rem;
+  height: 6rem;
+  margin-right: 2rem;
+}
+
+.header {
+  background-color: #333;
+  color: #ddd;
+  padding: 1rem 0;
+}
+
+.footer {
+  background-color: #333;
+  color: #ddd;
+  padding: 1rem 0;
 }
 
 .nav {
@@ -82,7 +94,7 @@ dt {
 
 .nav a {
   text-decoration: none;
-  color: #333;
+  color: #ddd;
   font-size: 16px;
   font-weight: bold;
   padding: 10px;
@@ -91,7 +103,7 @@ dt {
 }
 
 .nav a:hover {
-  background-color: #ddd;
+  background-color: rgb(122, 168, 179);
 }
 
 .nav a:active {
@@ -187,6 +199,20 @@ dt {
 
 .like-icon:hover {
   cursor: pointer;
+}
+
+.d-none {
+  display: none;
+}
+
+.about-section {
+  flex-direction: column;
+  height: 80vh;
+}
+
+.about-section p {
+  text-align: justify;
+  width: 50rem;
 }
 
 @media (min-width: 768px) {

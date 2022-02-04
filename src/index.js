@@ -4,3 +4,5 @@ import NewApi from './newApi.js';
 
 Movies.getMovies();
 NewApi.getLikes();
+Movies.counterMovies();
+NewApi.aboutSection();
