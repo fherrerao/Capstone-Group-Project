@@ -1,14 +1,30 @@
+import fetch from 'cross-fetch';
 import NewApi from './newApi.js';
 // import commentsApi from './commentsApi.js';
 
 export default class Movies {
   static url = 'https://api.tvmaze.com/search/shows?q=terror';
 
+  static counterMovies = async () => {
+    const response = await fetch(this.url);
+    const data = await response.json();
+    let counter = 0;
+    data.forEach((item) => {
+      if (item.show.image !== null) {
+        counter += 1;
+      }
+      const title = document.querySelector('.title');
+      if (title) title.textContent = `MOVIES (${counter})`;
+    });
+
+    return counter;
+  };
+
   static updateLikes = () => {
     NewApi.getLikes().then((data) => {
       data.forEach((item) => {
         const boxicon = document.getElementById(`${item.item_id}`);
-        boxicon.nextElementSibling.innerHTML = `${item.likes} likes`;
+        if (boxicon) { boxicon.nextElementSibling.innerHTML = `${item.likes} likes`; }
       });
     });
   };
@@ -54,18 +70,20 @@ export default class Movies {
     const movieContainer = document.querySelector('.movie-container');
 
     data.forEach((item) => {
-      const div = document.createElement('div');
-      div.classList.add('div-container');
-      div.innerHTML = `<img src="${item.show.image.medium}" alt="">
+      if (item.show.image !== null) {
+        const div = document.createElement('div');
+        div.classList.add('div-container');
+        div.innerHTML = `<img src="${item.show.image.medium}" alt="">
       <div class="media flex main-space-between">
         <li>${item.show.name}</li>
         <div class="likes-container">
-          <box-icon id=${item.show.id} class="like-icon" name='heart'></box-icon>
+          <box-icon color="red" animation="tada-hover" id=${item.show.id} class="like-icon" name='heart'></box-icon>
           <p>0 Likes</p>
         </div>
       </div>
       <button data-id="${item.show.id}" class="button">Comments</button>`;
-      movieContainer.appendChild(div);
+        movieContainer.appendChild(div);
+      }
     });
     this.setEventLikes();
     this.updateLikes();
