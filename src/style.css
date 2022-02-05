@@ -153,7 +153,8 @@ dt {
   cursor: pointer;
 }
 
-.button {
+.button,
+.send-comment {
   padding: 0.9rem 3rem;
   border-bottom: 4px solid black;
   border-right: 4px solid black;
@@ -161,7 +162,12 @@ dt {
   margin-top: 1rem;
   background-color: rgb(255, 81, 0);
   color: #fff;
-  width: 80%;
+}
+
+.name-user,
+.comment {
+  padding: 0.7rem;
+  width: 100%;
 }
 
 .button:hover {

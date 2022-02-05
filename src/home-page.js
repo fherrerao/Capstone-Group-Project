@@ -164,7 +164,7 @@ export default class Movies {
           <form class = "btn-send" action="">
             <input class="name-user" type="text" placeholder="Your name">
             <input class="comment" type="text" placeholder="Your comment">
-            <button class="send-comment" type="submit">Send</button>
+            <button class="send-comment button" type="submit">Send</button>
           </form>
           </div>
         </div>
