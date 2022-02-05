@@ -1,5 +1,7 @@
 import fetch from 'cross-fetch';
 import NewApi from './newApi.js';
+// eslint-disable-next-line import/no-cycle
+import commentsApi from './commentsApi.js';
 
 export default class Movies {
   static url = 'https://api.tvmaze.com/search/shows?q=terror';
@@ -23,7 +25,9 @@ export default class Movies {
     NewApi.getLikes().then((data) => {
       data.forEach((item) => {
         const boxicon = document.getElementById(`${item.item_id}`);
-        if (boxicon) { boxicon.nextElementSibling.innerHTML = `${item.likes} likes`; }
+        if (boxicon) {
+          boxicon.nextElementSibling.innerHTML = `${item.likes} likes`;
+        }
       });
     });
   };
@@ -35,6 +39,40 @@ export default class Movies {
         NewApi.setLike(parseInt(element.id, 10)).then(() => {
           this.updateLikes();
         });
+      });
+    });
+  };
+
+  static handleForm = (id) => {
+    const username = document.querySelector('.name-user');
+    const comment = document.querySelector('.comment');
+    const btnSend = document.querySelector('.send-comment');
+    btnSend.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      commentsApi
+        .setComments(id, username.value, comment.value)
+        .then((data) => {
+          if (data === 'Created') {
+            this.renderComments(id);
+            username.value = '';
+            comment.value = '';
+          }
+        });
+    });
+  };
+
+  static renderComments = (idMovie) => {
+    commentsApi.getComments(idMovie).then((data) => {
+      const list = document.querySelector('.comments-list');
+      const title = document.querySelector('.title-comment');
+      title.textContent = `Comments (${commentsApi.counterComments(data)})`;
+      list.innerHTML = '';
+      data.forEach((item) => {
+        const listItem = document.createElement('li');
+
+        listItem.textContent = `${item.creation_date} ${item.username} : ${item.comment}`;
+        list.appendChild(listItem);
       });
     });
   };
@@ -56,7 +94,7 @@ export default class Movies {
           <p>0 Likes</p>
         </div>
       </div>      
-      <button data-id="${item.show.id}" class="button">Comments</button>`;
+      <button id="${item.show.id}" class="button">Comments</button>`;
         movieContainer.appendChild(div);
       }
     });
@@ -67,7 +105,7 @@ export default class Movies {
 
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        const id = event.target.getAttribute('data-id');
+        const id = event.target.getAttribute('id');
         const allData = data.filter(
           (item) => item.show.id === parseInt(id, 10),
         )[0].show;
@@ -116,6 +154,19 @@ export default class Movies {
               </div>
             </dl>
           </div>
+          <div class="d-comments">
+            <h3 class="title-comment">Comments (0)</h3>
+            <ul class="comments-list"></ul>
+          </div>
+          
+          <div class="formulary">
+          <h3>Add comments</h3>
+          <form class = "btn-send" action="">
+            <input class="name-user" type="text" placeholder="Your name">
+            <input class="comment" type="text" placeholder="Your comment">
+            <button class="send-comment" type="submit">Send</button>
+          </form>
+          </div>
         </div>
       </div>`;
         document.body.insertAdjacentHTML('beforeend', template);
@@ -126,6 +177,8 @@ export default class Movies {
             document.querySelector('.card-wrapper').remove();
           });
         });
+        this.renderComments(button.id);
+        this.handleForm(button.id);
       });
     });
   };
