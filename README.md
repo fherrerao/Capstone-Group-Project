@@ -64,8 +64,8 @@ Feel free to check the [issues page](https://github.com/fherrerao/Capstone-Group
 Give a ⭐️ if you like this project!
 
 ## Acknowledgments
-
-- I used icons from [Boxicons](https://boxicons.com/)
+- The [Involvement](https://www.notion.so/Involvement-API-869e60b5ad104603aa6db59e08150270) and [Tvmaze](https://www.tvmaze.com/api) apis were used to make this project
+- We used icons from [Boxicons](https://boxicons.com/)
 
 ## 📝 License
 
