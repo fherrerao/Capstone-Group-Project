@@ -48,10 +48,6 @@ dt {
   margin-right: 1rem;
 }
 
-.d-none {
-  display: none;
-}
-
 .text-center {
   text-align: center;
 }
@@ -141,7 +137,8 @@ dt {
   transform: translateX(-50%) translateY(-50%);
   box-shadow: 0 0 40px 5px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  overflow: auto;
+  overflow-y: auto;
+  height: 80%;
 }
 
 .card-image img {
@@ -244,6 +241,18 @@ dt {
 .about-section p {
   text-align: justify;
   width: 50rem;
+}
+
+.btn-send {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: 1rem;
+}
+
+.d-none {
+  display: none;
 }
 
 @media (min-width: 768px) {

@@ -1,5 +1,6 @@
 import fetch from 'cross-fetch';
 import NewApi from './newApi.js';
+// eslint-disable-next-line import/no-cycle
 import commentsApi from './commentsApi.js';
 
 export default class Movies {
@@ -24,23 +25,12 @@ export default class Movies {
     NewApi.getLikes().then((data) => {
       data.forEach((item) => {
         const boxicon = document.getElementById(`${item.item_id}`);
-        if (boxicon) { boxicon.nextElementSibling.innerHTML = `${item.likes} likes`; }
+        if (boxicon) {
+          boxicon.nextElementSibling.innerHTML = `${item.likes} likes`;
+        }
       });
     });
   };
-
-  // static updateComments = () => {
-  //   commentsApi.getComments().then((data) => {
-  //     data.forEach((item) => {
-  //       const comment = document.getElementById('comment');
-  //       const name = document.getElementById('comment-name');
-  //       const date = document.getElementById('comment-date');
-  //       comment.innerHTML = `${item.comment}`;
-  //       name.innerHTML = `${item.name}`;
-  //       date.innerHTML = `${item.date}`;
-  //     });
-  //   });
-  // };
 
   static setEventLikes = () => {
     const likeIcon = document.querySelectorAll('.like-icon');
@@ -53,12 +43,39 @@ export default class Movies {
     });
   };
 
-  static setEventComments = (id, movieId, username, date, comment) => {
-    const addCommentBtns = document.querySelectorAll('.add-comment-btn');
-    addCommentBtns.forEach((element) => {
-      element.addEventListener('click', () => {
-        commentsApi.setComments(id, movieId, username, date, comment);
+  static handleForm = (id) => {
+    const username = document.querySelector('.name-user');
+    const comment = document.querySelector('.comment');
+    const btnSend = document.querySelector('.send-comment');
+    btnSend.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      commentsApi
+        .setComments(id, username.value, comment.value)
+        .then((data) => {
+          if (data === 'Created') {
+            this.renderComments(id);
+            username.value = '';
+            comment.value = '';
+          }
+        });
+    });
+  };
+
+  static renderComments = (idMovie) => {
+    commentsApi.getComments(idMovie).then((data) => {
+      const list = document.querySelector('.comments-list');
+      const title = document.querySelector('.title-comment');
+      title.textContent = `Comments (${commentsApi.counterComments(data)})`;
+      list.innerHTML = '';
+      data.forEach((item) => {
+        const listItem = document.createElement('li');
+
+        listItem.textContent = `${item.creation_date} ${item.username} : ${item.comment}`;
+        list.appendChild(listItem);
       });
+
+      console.log(data);
     });
   };
 
@@ -78,24 +95,26 @@ export default class Movies {
           <box-icon color="red" animation="tada-hover" id=${item.show.id} class="like-icon" name='heart'></box-icon>
           <p>0 Likes</p>
         </div>
-      </div>
-      <button data-id="${item.show.id}" class="button button-main">Comments</button>`;
+      </div>      
+      <button id="${item.show.id}" class="button">Comments</button>`;
         movieContainer.appendChild(div);
       }
     });
     this.setEventLikes();
     this.updateLikes();
 
-    const buttons = document.querySelectorAll('.button-main');
+    const buttons = document.querySelectorAll('.button');
 
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        const id = event.target.getAttribute('data-id');
+        console.log(button.id);
+        // commentsApi.setComments(button.id);
+
+        const id = event.target.getAttribute('id');
         const allData = data.filter(
           (item) => item.show.id === parseInt(id, 10),
         )[0].show;
-
-        let template = `<div class="card-wrapper">
+        const template = `<div class="card-wrapper">
         <div class="card">
           <div class="card-header">
             <div class="close">
@@ -140,43 +159,22 @@ export default class Movies {
               </div>
             </dl>
           </div>
+          <div class="d-comments">
+            <h3 class="title-comment">Comments (0)</h3>
+            <ul class="comments-list"></ul>
+          </div>
+          
+          <div class="formulary">
+          <h3>Add comments</h3>
+          <form class = "btn-send" action="">
+            <input class="name-user" type="text" placeholder="Your name">
+            <input class="comment" type="text" placeholder="Your comment">
+            <button class="send-comment" type="submit">Send</button>
+          </form>
+          </div>
         </div>
       </div>`;
-        const commentsPromise = commentsApi.getComments();
-        let commentsData;
-        commentsPromise.then((data) => {
-          commentsData = data.filter((item) => item.movieId === parseInt(id, 10));
-          const commentTemplate = commentsData.map((item) => {
-            const { username, date, comment } = item;
-            return `<div class="comments">
-            <h3>Comments</h3>
-            <div class="comment-container">
-              <div class="comment-input flex">
-                <input type="text" placeholder="Add a comment...">
-                <button data-${id} class="button btn-add-comment">Add</button>
-              </div>
-            </div>
-            <div class="comment-list">
-              <div class="comment flex cross-center">
-                <div class="comment-header flex cross-center">
-                  <div class="comment-name flex cross-center">
-                    <h4 id="comment-name" class="mr-1">${username}</h4>
-                    <p id="comment-date" class="mr-1>${date}</p>
-                  </div>
-                </div>
-                <div class="comment-content flex cross-center">
-                  <p id="comment" class="mr-1">${comment}</p>
-                  <div class="comment-actions">
-                    <button data-${id} class="button btn-like">Like</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>`;
-          });
-          template += commentTemplate.join('');
-          document.body.insertAdjacentHTML('beforeend', template);
-        });
+        document.body.insertAdjacentHTML('beforeend', template);
 
         const close = document.querySelectorAll('.close');
         close.forEach((item) => {
@@ -184,19 +182,8 @@ export default class Movies {
             document.querySelector('.card-wrapper').remove();
           });
         });
-
-        const addCommentBtns = document.querySelectorAll('.btn-add-comment');
-        addCommentBtns.forEach((element) => {
-          element.addEventListener('click', () => {
-            const commentInput = document.querySelector('.comment-input input');
-            const comment = commentInput.value;
-            const id = element.getAttribute('data-id');
-            const username = 'user' + Math.floor(Math.random() * 10000000);
-            const date = new Date().format('dd/mm/yyyy');
-            const dateString = date.toLocaleDateString();
-            commentsApi.setComments(id, movieId, username, dateString, comment);
-          });
-        });
+        this.renderComments(button.id);
+        this.handleForm(button.id);
       });
     });
   };
