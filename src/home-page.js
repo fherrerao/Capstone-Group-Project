@@ -74,8 +74,6 @@ export default class Movies {
         listItem.textContent = `${item.creation_date} ${item.username} : ${item.comment}`;
         list.appendChild(listItem);
       });
-
-      console.log(data);
     });
   };
 
@@ -107,9 +105,6 @@ export default class Movies {
 
     buttons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        console.log(button.id);
-        // commentsApi.setComments(button.id);
-
         const id = event.target.getAttribute('id');
         const allData = data.filter(
           (item) => item.show.id === parseInt(id, 10),
