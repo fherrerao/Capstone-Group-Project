@@ -5,9 +5,18 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "webpack serve --open",
-    "build": "webpack"
+    "build": "webpack",
+    "jlint": "npx eslint .",
+    "fjlint": "npx eslint --fix .",
+    "stylelint": "npx stylelint '**/*.css' '**/*.scss'",
+    "fstylelint": "npx stylelint --fix '**/*.css' '**/*.scss'",
+    "hint": "npx hint --telemetry=off .",
+    "fhint": "npx hint --fix --telemetry=off ."
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
   },
   "repository": {
     "type": "git",
@@ -20,11 +29,15 @@
     "url": "https://github.com/fherrerao/webpack_template/issues"
   },
   "homepage": "https://github.com/fherrerao/webpack_template#readme",
-
   "dependencies": {
-    "lodash": "^4.17.21"
+    "cross-fetch": "^3.1.5",
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.2.0",
+    "package-lock.json": "^1.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.5.1",
     "eslint": "^7.32.0",
@@ -32,6 +45,7 @@
     "eslint-plugin-import": "^2.25.4",
     "hint": "^6.1.9",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^27.4.7",
     "style-loader": "^3.3.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
