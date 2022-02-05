@@ -4,7 +4,18 @@ export default class commentsApi {
 
   static getComments = async () => {
     const response = await fetch(this.url);
+    if (response.status == "400") {
+      console.log('failed');
+      return [{
+        item_id: 0,
+        item_movie_id: 0,
+        item_name: 'user name',
+        item_date: '2020/01/01',
+        item_comment: "No comments yet",
+      }];
+    }
     const data = await response.json();
+    console.log(data);
     return data;
   };
 
