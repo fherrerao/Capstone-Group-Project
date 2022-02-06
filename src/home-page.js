@@ -1,10 +1,10 @@
-import fetch from 'cross-fetch';
-import NewApi from './newApi.js';
+import fetch from "cross-fetch";
+import NewApi from "./newApi.js";
 // eslint-disable-next-line import/no-cycle
-import commentsApi from './commentsApi.js';
+import commentsApi from "./commentsApi.js";
 
 export default class Movies {
-  static url = 'https://api.tvmaze.com/search/shows?q=terror';
+  static url = "https://api.tvmaze.com/search/shows?q=terror";
 
   static counterMovies = async () => {
     const response = await fetch(this.url);
@@ -14,7 +14,7 @@ export default class Movies {
       if (item.show.image !== null) {
         counter += 1;
       }
-      const title = document.querySelector('.title');
+      const title = document.querySelector(".title");
       if (title) title.textContent = `MOVIES (${counter})`;
     });
 
@@ -33,9 +33,9 @@ export default class Movies {
   };
 
   static setEventLikes = () => {
-    const likeIcon = document.querySelectorAll('.like-icon');
+    const likeIcon = document.querySelectorAll(".like-icon");
     likeIcon.forEach((element) => {
-      element.addEventListener('click', () => {
+      element.addEventListener("click", () => {
         NewApi.setLike(parseInt(element.id, 10)).then(() => {
           this.updateLikes();
         });
@@ -44,19 +44,19 @@ export default class Movies {
   };
 
   static handleForm = (id) => {
-    const username = document.querySelector('.name-user');
-    const comment = document.querySelector('.comment');
-    const btnSend = document.querySelector('.send-comment');
-    btnSend.addEventListener('click', (e) => {
+    const username = document.querySelector(".name-user");
+    const comment = document.querySelector(".comment");
+    const btnSend = document.querySelector(".send-comment");
+    btnSend.addEventListener("click", (e) => {
       e.preventDefault();
 
       commentsApi
         .setComments(id, username.value, comment.value)
         .then((data) => {
-          if (data === 'Created') {
+          if (data === "Created") {
             this.renderComments(id);
-            username.value = '';
-            comment.value = '';
+            username.value = "";
+            comment.value = "";
           }
         });
     });
@@ -64,12 +64,12 @@ export default class Movies {
 
   static renderComments = (idMovie) => {
     commentsApi.getComments(idMovie).then((data) => {
-      const list = document.querySelector('.comments-list');
-      const title = document.querySelector('.title-comment');
+      const list = document.querySelector(".comments-list");
+      const title = document.querySelector(".title-comment");
       title.textContent = `Comments (${commentsApi.counterComments(data)})`;
-      list.innerHTML = '';
+      list.innerHTML = "";
       data.forEach((item) => {
-        const listItem = document.createElement('li');
+        const listItem = document.createElement("li");
 
         listItem.textContent = `${item.creation_date} ${item.username} : ${item.comment}`;
         list.appendChild(listItem);
@@ -80,12 +80,12 @@ export default class Movies {
   static getMovies = async () => {
     const response = await fetch(this.url);
     const data = await response.json();
-    const movieContainer = document.querySelector('.movie-container');
+    const movieContainer = document.querySelector(".movie-container");
 
     data.forEach((item) => {
       if (item.show.image !== null) {
-        const div = document.createElement('div');
-        div.classList.add('div-container');
+        const div = document.createElement("div");
+        div.classList.add("div-container");
         div.innerHTML = `<img src="${item.show.image.medium}" alt="">
       <div class="media flex main-space-between">
         <li>${item.show.name}</li>
@@ -101,13 +101,13 @@ export default class Movies {
     this.setEventLikes();
     this.updateLikes();
 
-    const buttons = document.querySelectorAll('.button');
+    const buttons = document.querySelectorAll(".button");
 
     buttons.forEach((button) => {
-      button.addEventListener('click', (event) => {
-        const id = event.target.getAttribute('id');
+      button.addEventListener("click", (event) => {
+        const id = event.target.getAttribute("id");
         const allData = data.filter(
-          (item) => item.show.id === parseInt(id, 10),
+          (item) => item.show.id === parseInt(id, 10)
         )[0].show;
         const template = `<div class="card-wrapper">
         <div class="card">
@@ -115,44 +115,38 @@ export default class Movies {
             <div class="close">
               <i class="fas fa-times"></i>
             </div>
+            <h2 class="card-title text-center">${allData.name}</h2>
             <div class="card-image flex main-center">
               <img src="${allData.image.medium}" alt="character">
             </div>
-            <h2 class="card-title text-center">${allData.name}</h2>
+            
           </div>
           <div class="card-content">
-            <dl class="flex main-space-around">
-              <div class="left">
-                <dt>Type</dt>
-                  <dd>${allData.type}</dd>
-                <dt>Language</dt>
-                  <dd>${allData.language}</dd>
-                <dt>Generes</dt>
-                  <dd>${allData.genres.toString() || 'None'}</dd>
-                <dt>Status</dt>
-                  <dd>${allData.status}</dd>
-                <dt>Runtime</dt>
-                  <dd>${allData.runtime}</dd>
-                <dt>AverageRuntime</dt>
-                  <dd>${allData.averageRuntime}</dd>
-              </div>
-              <div class="right">
-                <dt>Premiered</dt>
-                  <dd>${allData.premiered}</dd>
-                <dt>Ended</dt>
-                  <dd>${allData.ended}</dd>
-                <dt>OfficialSite</dt>
-                  <dd><a href="${allData.officialSite}">link</a></dd>
-                <dt>Schedule</dt>
-                  <dd>time: ${allData.schedule.time}, day: ${
-          allData.schedule.days
-        }</dd>
-                <dt>Rating</dt>
-                  <dd>average: ${allData.rating.average}</dd>
-                <dt>Weight</dt>
-                  <dd>${allData.weight}</dd>
-              </div>
-            </dl>
+            <div class="flex">
+              
+              <ul class="description">
+                <li><p>Genre:</p> <span>${
+                  allData.genres.toString() || "No available"
+                }</span></li>
+                <li><p>Language:</p> <span>${
+                  allData.language || "No available"
+                }</span></li>
+                <li> <p>Premiered:</p> <span>${
+                  allData.premiered || "No available"
+                }</span></li>
+                <li> <p>Rating:</p> <span>${
+                  allData.rating.average || "No available"
+                }</span></li>
+                <li> <p>Official site:</p> <span><a href="${
+                  allData.officialSite
+                }">link</a></span></li>
+              </ul>  
+            </div>
+            <div class="summary">
+              <h3>Summary</h3>
+              ${allData.summary}
+            </div>
+            
           </div>
           <div class="d-comments">
             <h3 class="title-comment">Comments (0)</h3>
@@ -169,12 +163,12 @@ export default class Movies {
           </div>
         </div>
       </div>`;
-        document.body.insertAdjacentHTML('beforeend', template);
+        document.body.insertAdjacentHTML("beforeend", template);
 
-        const close = document.querySelectorAll('.close');
+        const close = document.querySelectorAll(".close");
         close.forEach((item) => {
-          item.addEventListener('click', () => {
-            document.querySelector('.card-wrapper').remove();
+          item.addEventListener("click", () => {
+            document.querySelector(".card-wrapper").remove();
           });
         });
         this.renderComments(button.id);
