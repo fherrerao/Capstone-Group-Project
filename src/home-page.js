@@ -137,7 +137,7 @@ export default class Movies {
                 <li> <p>Rating:</p> <span>${
                   allData.rating.average || "No available"
                 }</span></li>
-                <li> <p>Official site:</p> <span><a href="${
+                <li> <p>Official site:</p> <span><a class="link" href="${
                   allData.officialSite
                 }">link</a></span></li>
               </ul>  
