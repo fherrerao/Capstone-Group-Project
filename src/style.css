@@ -24,6 +24,16 @@ body {
   margin: 0 auto;
 }
 
+main {
+  background-image: url("./assets/background_home.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+main p {
+  color: white;
+}
+
 ul {
   list-style: none;
 }
@@ -32,6 +42,9 @@ ul {
   text-align: center;
   font-family: "COCOGOOSE", sans-serif;
   font-size: 4rem;
+  margin: 0;
+  padding-top: 3rem;
+  color: #ddd;
 }
 
 dl {
@@ -217,9 +230,13 @@ h3,
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid black;
+  border: 2px solid #814646;
   margin: 3rem 0;
   border-radius: 1rem;
+}
+
+.div-container img {
+  border-radius: 12px;
 }
 
 .likes-container {
@@ -236,6 +253,7 @@ h3,
 .media {
   width: 21rem;
   margin-top: 1rem;
+  color: white;
 }
 
 .like-icon:hover {
@@ -297,11 +315,10 @@ h3,
 
 @media (min-width: 768px) {
   .movie-container {
-    display: -ms-grid;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    -ms-grid-columns: repeat(3, 1fr);
     column-gap: 2rem;
+    margin: 0;
   }
 
   .header {
