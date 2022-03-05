@@ -4,7 +4,8 @@
 
 > In this project, you find some terror movies where you can give likes or add a comment.
 
-![Movies](https://user-images.githubusercontent.com/91301423/152594625-e2c731a8-9ee5-45f9-9329-88589ef34014.png)
+
+![Movies](https://user-images.githubusercontent.com/91301423/156890078-37568514-5bda-4481-a3b9-436e723db0eb.png)
 
 
 ## Built With
