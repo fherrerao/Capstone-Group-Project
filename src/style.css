@@ -26,8 +26,8 @@ body {
 
 main {
   background-image: url("./assets/background_home.jpg");
-  /* background-repeat: no-repeat; */
-  background-size: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: rgb(47, 47, 49);
 }
 
