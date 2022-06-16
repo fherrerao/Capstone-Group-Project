@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Leaderboard
+# Movies App
 
 > In this project, you find some terror movies where you can give likes or add a comment.
 
